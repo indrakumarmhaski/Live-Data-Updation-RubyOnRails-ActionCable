@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
 
     def create
         comment = @post.comments.create! comments_params
+        CommentsChannel.broadcast(comment)
         redirect_to @post
     end
 
